@@ -1,10 +1,6 @@
 import Head from 'next/head';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 
-// pages/csr/posts/[id].tsxと共通するコードが複数あるが
-// 解説が1ファイルで完結できるようにあえて
-// 別ファイルに用意しない形で記述している
-
 type Post = {
   userId: number;
   id: number;

@@ -29,7 +29,7 @@ export default function SSR({ posts }: SSRProps) {
         <h1>Post一覧(SSR)</h1>
         <ul>
           {posts.map(({ id, title }) => {
-            const postDetailPath = `/ssr/posts/${id}`;
+            const postDetailPath = `/2-ssr/posts/${id}`;
 
             return (
               <li key={id}>
@@ -43,9 +43,10 @@ export default function SSR({ posts }: SSRProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps<SSRProps> = async (
-  _context: GetServerSidePropsContext
-) => {
+// Imports used in getServerSideProps will not be bundled for the client-side.
+// This means you can write server-side code directly in getServerSideProps. This includes reading from the filesystem or a database.
+// JSの無効化によりglobal.cssが反映されなくなる
+export const getServerSideProps: GetServerSideProps<SSRProps> = async (context) => {
   const res = await fetch('https://jsonplaceholder.typicode.com/posts');
   const posts = (await res.json()) as Post[];
 
