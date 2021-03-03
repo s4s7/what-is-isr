@@ -2,13 +2,13 @@ import Head from 'next/head';
 import { GetStaticProps, GetStaticPropsContext } from 'next';
 import Link from 'next/link';
 
-// pages/ssg/index.tsxのコードと共通している部分が多いが、
+// pages/isg/index.tsxのコードと共通している部分が多いが、
 // 解説が1ファイルで完結できるようにあえて
 // 別ファイルに用意しない形で記述している。
 //
 // また、
-// この中身のファイルは実質pages/sssg/index.tsxと同じで、
-// ISG解説用のサンプルコードのメインはpages/isg/posts/[id].tsxとなる
+// この中身のファイルは実質pages/isr/index.tsxと同じで、
+// ISR解説用のサンプルコードのメインはpages/isr/posts/[id].tsxとなる
 
 type Post = {
   userId: number;
@@ -17,15 +17,15 @@ type Post = {
   body: string;
 };
 
-interface ISGProps {
+interface ISRProps {
   posts: Post[];
 }
 
-export default function ISG({ posts }: ISGProps) {
+export default function ISR({ posts }: ISRProps) {
   return (
     <div>
       <Head>
-        <title>ISGの解説用ページ（Postリンク一覧）</title>
+        <title>ISRの解説用ページ（Postリンク一覧）</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -38,11 +38,9 @@ export default function ISG({ posts }: ISGProps) {
                 <Link
                   // https://nextjs.org/docs/api-reference/next/link
                   // "next/link" はデフォルトでリンク先のデータの取得(prefetch)やISGを実行させてしまう
-                  // ISGの動作確認がわかりやすいように、ここではprefetchの機能をオフ
-                  // trueだと画面のスクロールに合わせて, prefetch
-                  // falseたとカーソル合わすとprefetch
+                  // ISGの動作確認がわかりやすいように、ここではprefetchの機能をオフにしている
                   prefetch={false}
-                  href={`/4-isg/posts/${post.id}`}
+                  href={`/5-isr/posts/${post.id}`}
                 >
                   {post.title}
                 </Link>
@@ -55,7 +53,7 @@ export default function ISG({ posts }: ISGProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps<ISGProps> = async (
+export const getStaticProps: GetStaticProps<ISRProps> = async (
   _context: GetStaticPropsContext
 ) => {
   const res = await fetch('https://jsonplaceholder.typicode.com/posts');

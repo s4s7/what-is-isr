@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react';
 // the Link component to enable client-side navigation between pages.
 // フレームワークなのでreact routerを導入しなくてもurlが規定される
 // 普通ページ遷移はaタグでやるがnext.jsではLinkコンポーネントを作る
+// bracket makes this route dynamic
+// HydrationでLinkとか読みこまれてインターラクティブになる
 import Link from 'next/link';
 
 // pages/ssr/index.tsxと共通するコードが複数あるが
@@ -38,12 +40,15 @@ type Post = {
 // 1ファイル:1モジュール推奨なので、名前なし(default)export
 // 関数コンポーネント
 export default function CSR() {
+
   // hoosとは、クラスの機能(stateやライフサイクル)をfunctional componentでも使えるという意味合い
   // React Hooksで関数コンポーネントでもstateを扱える(thisが不要になる)
   // useStateはReact Hooksのmethod
   // const [stete変数名, state変更関数名] = useState<state変数名の型アノテーション>(stateの初期値 ex.false);
   // 配列 : 型の種類[]
+
   const [posts, setState] = useState<Post[]>([]);
+
 
   // useEffect( コールバック関数:()=>{} )
   // React Hooksで関数コンポーネントでもライフサイクル(生成mounting→更新→破棄unmounting)を扱える

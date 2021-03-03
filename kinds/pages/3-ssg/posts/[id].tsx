@@ -21,6 +21,7 @@ interface SSGProps {
   post: Post;
 }
 
+// ページコンポーネント
 export default function SSGPostsId({ post }: SSGProps) {
   const { id, userId, title, body } = post;
 
@@ -47,12 +48,16 @@ export default function SSGPostsId({ post }: SSGProps) {
 type SSGParams = {
   id: string;
 };
+
+// tells next which dynamic pages to render
 export const getStaticPaths: GetStaticPaths<SSGParams> = async (
   _context: GetStaticPathsContext
 ) => {
   const res = await fetch('https://jsonplaceholder.typicode.com/posts');
   const posts = (await res.json()) as Post[];
 
+
+  
   /**
    * const paths = [
    *   { params: { id: '1' } }, // ここの "id" は "[id].tsx" の "[id]" と紐づく。
@@ -79,7 +84,7 @@ export const getStaticPaths: GetStaticPaths<SSGParams> = async (
     //
     // fallbackにfalseを設定した状態で、
     // クライアントからリクエストされたURLに対する
-    // falseの場合、リソース(SSGで生成したHTML)がない場合は404を返す
+    // false → リソース(SSGで生成したHTML)がない場合は404を返す
     fallback: false,
   };
 };

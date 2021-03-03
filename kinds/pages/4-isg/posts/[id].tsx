@@ -46,6 +46,8 @@ export default function ISGPostsId({ post }: ISGProps) {
 type ISGParams = {
   id: string;
 };
+
+// tells next which dynamic pages to render
 export const getStaticPaths: GetStaticPaths<ISGParams> = async (
   _context: GetStaticPathsContext
 ) => {
@@ -112,7 +114,9 @@ export const getStaticPaths: GetStaticPaths<ISGParams> = async (
      * - fallback: 'blocking'(SSR)
      *     - → クライアント側でJSが実行できないが、SSRの動きとなり完全な形でページが表示される
      */
-    fallback: true, // true or 'blocking' for ISG
+    // true だとjs無効化した時にCSRなのでデータが表示されない
+    // blockだとjs無効化したとしてもSSRなのでデータが表示される
+    fallback: 'blocking', // true or 'blocking' for ISG
   };
 };
 

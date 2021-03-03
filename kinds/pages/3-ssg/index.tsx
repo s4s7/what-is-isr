@@ -31,7 +31,7 @@ export default function SSG({ posts }: SSGProps) {
           {posts.map((post) => {
             return (
               <li key={post.id}>
-                <Link href={`/ssg/posts/${post.id}`}>{post.title}</Link>
+                <Link href={`/3-ssg/posts/${post.id}`}>{post.title}</Link>
               </li>
             );
           })}
@@ -42,6 +42,7 @@ export default function SSG({ posts }: SSGProps) {
 }
 
 // ssrはgetServerSideProps
+// ssgはgetStaticProps or getStaticPaths
 export const getStaticProps: GetStaticProps<SSGProps> = async (
   _context: GetStaticPropsContext
 ) => {
